@@ -1,0 +1,8 @@
+{
+  "name": "block-wasting",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/omitsuhashi/block-wasting",
+  "author": "Osamu Mitsuhashi <osamu.mitsuhashi224@gmail.com>",
+  "license": "MIT"
+}
