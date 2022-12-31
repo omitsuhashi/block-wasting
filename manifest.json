@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "version": "0.0.1",
+  "name": "block wasting",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "activeTab",
+    "scripting"
+  ],
+  "action": {}
+}

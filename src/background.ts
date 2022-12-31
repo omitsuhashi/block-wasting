@@ -4,7 +4,7 @@ const overlay = (_title: string) => {
   overlayDiv.className = 'block-wasting-overlay';
   overlayDiv.style.zIndex = '2147483647';
   overlayDiv.style.width = '100vw';
-  overlayDiv.style.height = '100%';
+  overlayDiv.style.height = '100vh';
   overlayDiv.style.backgroundColor = 'white';
   overlayDiv.style.position = 'fixed';
   overlayDiv.style.visibility = 'visible';
