@@ -14,6 +14,11 @@ const overlay = (_title: string) => {
   document.body.appendChild(overlayDiv);
 }
 
+const hostname = (): string => location.hostname;
+
 (() => {
-  overlay('dummy');
+  console.info(hostname());
+  if (hostname() === 'www.youtube.com') {
+    overlay('dummy');
+  }
 })()
