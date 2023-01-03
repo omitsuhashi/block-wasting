@@ -12,6 +12,7 @@ const config: Configuration = {
   entry: {
     background: path.join(__dirname, 'src/background.ts'),
     contents: path.join(__dirname, 'src/contents.ts'),
+    popup: path.join(__dirname, 'src/popup.tsx'),
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -23,11 +24,15 @@ const config: Configuration = {
         {
           from: "manifest.json",
           to: path.join(__dirname, 'dist'),
+        },
+        {
+          from: path.join(__dirname, "public/popup.html"),
+          to: path.join(__dirname, 'dist')
         }
       ]
     })
   ],
-  devtool: 'cheap-module-source-map',
+  devtool: 'inline-source-map',
   cache: true,
   watchOptions:{
     poll: true,
