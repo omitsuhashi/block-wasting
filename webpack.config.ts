@@ -22,7 +22,7 @@ const config: Configuration = {
   },
   entry: {
     background: path.join(__dirname, 'src/background.ts'),
-    contents: path.join(__dirname, 'src/contents.ts'),
+    contents: path.join(__dirname, 'src/contents.tsx'),
     popup: path.join(__dirname, 'src/popup.tsx'),
   },
   output: {
@@ -48,6 +48,9 @@ const config: Configuration = {
   watchOptions:{
     poll: true,
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
+  }
 }
 
 export default config;
