@@ -1,11 +1,5 @@
-export interface Storage {
-  date: Date;
-  histories: Histories;
-  rules: Rules;
-}
+export type Storage = {[hostname: string]: Rule}
 
-type Histories = {[host: string]: number};
-type Rules = {[host: string]: Rule}
-type Rule = {
+export type Rule = {
   limit: number
 }

@@ -1,3 +1,5 @@
+import {Rule} from "./models";
+
 const _overlay = (_title: string) => {
   const overlayDiv = document.createElement('div')
   const titleElement = document.createElement('p');
@@ -15,29 +17,27 @@ const _overlay = (_title: string) => {
   document.body.appendChild(overlayDiv);
 }
 
-const hostname = (): string => location.hostname;
-
 // dummy
 let count = 0;
 
-const _isBlockTarget = (): boolean => {
-  return count !== 0;
+const _isBlockTarget = (rule: Rule): boolean => {
+  return count >= rule.limit;
 }
 
-const intervalHandler = (): void => {
-  console.info('doing');
-  const blocking = _isBlockTarget();
-  console.info(blocking)
-  if (blocking) {
+const intervalHandler = (rule: Rule): void => {
+  const isTarget = _isBlockTarget(rule);
+  if (isTarget) {
     _overlay('dummy');
   } else {
     count += 1;
   }
 }
 
-(() => {
-  if (hostname() === 'www.amazon.co.jp') {
-    setInterval(intervalHandler, 5 * 1000)
-    intervalHandler();
+const onLoad = async () => {
+  const rule = await chrome.storage.sync.get(location.hostname);
+  if (Object.keys(rule).length > 0) {
+    setInterval(intervalHandler, 5 * 1000, rule[location.hostname]);
   }
-})()
+};
+
+onLoad().then();
