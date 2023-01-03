@@ -22,7 +22,7 @@ const config: Configuration = {
   },
   entry: {
     background: path.join(__dirname, 'src/background.ts'),
-    contents: path.join(__dirname, 'src/contents.tsx'),
+    contents: path.join(__dirname, 'src/contents.ts'),
     popup: path.join(__dirname, 'src/popup.tsx'),
   },
   output: {
