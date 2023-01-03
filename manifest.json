@@ -12,7 +12,10 @@
     "activeTab",
     "scripting"
   ],
-  "action": {},
+  "action": {
+    "default_title": "Click to view a popup",
+    "default_popup": "popup.html"
+  },
   "content_scripts": [{
     "matches": ["<all_urls>"],
     "js": ["contents.js"]
