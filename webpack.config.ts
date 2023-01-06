@@ -33,12 +33,12 @@ const config: Configuration = {
     new CopyPlugin({
       patterns: [
         {
-          from: "manifest.json",
+          from: "public/manifest.json",
           to: path.join(__dirname, 'dist'),
         },
         {
-          from: path.join(__dirname, "src/popup.html"),
-          to: path.join(__dirname, 'dist')
+          from: path.join(__dirname, "public/popup.html"),
+          to: path.join(__dirname, 'dist'),
         }
       ]
     })
