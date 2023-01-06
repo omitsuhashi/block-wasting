@@ -37,7 +37,7 @@ const config: Configuration = {
           to: path.join(__dirname, 'dist'),
         },
         {
-          from: path.join(__dirname, "public/popup.html"),
+          from: path.join(__dirname, "src/popup.html"),
           to: path.join(__dirname, 'dist')
         }
       ]
