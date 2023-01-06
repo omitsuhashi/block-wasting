@@ -1,5 +1,7 @@
 import {Rule} from "./models";
 
+let intervalId: number | undefined = undefined;
+
 const _overlay = (_title: string) => {
   const overlayDiv = document.createElement('div')
   const titleElement = document.createElement('p');
@@ -28,6 +30,7 @@ const intervalHandler = (rule: Rule): void => {
   const isTarget = _isBlockTarget(rule);
   if (isTarget) {
     _overlay('dummy');
+    clearInterval(intervalId);
   } else {
     count += 1;
   }
@@ -36,7 +39,7 @@ const intervalHandler = (rule: Rule): void => {
 const onLoad = async () => {
   const rule = await chrome.storage.sync.get(location.hostname);
   if (Object.keys(rule).length > 0) {
-    setInterval(intervalHandler, 5 * 1000, rule[location.hostname]);
+    intervalId = setInterval(intervalHandler, 5 * 1000, rule[location.hostname]);
   }
 };
 
