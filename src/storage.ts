@@ -15,8 +15,7 @@ const fetchSettings = async (): Promise<SettingType> => chrome.storage.sync.get(
 
 export const hasSetting = async (hostname: string): Promise<boolean> => {
   const settings = await fetchSettings();
-  const hostnames = Object.keys(settings);
-  return hostname in hostnames;
+  return hostname in settings;
 };
 
 export const addHost = async (hostname: string): Promise<void> => {

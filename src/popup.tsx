@@ -1,7 +1,7 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import Tab = chrome.tabs.Tab;
-import { hasSetting } from './storage';
+import { addHost, hasSetting } from './storage';
 
 // type InputProp = {
 //   value: string,
@@ -33,18 +33,21 @@ function Index(): JSX.Element {
   const [hostname, setHostname] = useState<string>();
   const [clickable, setClickable] = useState<boolean>();
 
-  (async () => {
-    const tab = await getCurrentTab();
-    if (tab?.url) {
-      const url = new URL(tab.url);
-      setHostname(url.hostname);
-      const settingExists = await hasSetting(url.hostname);
-      setClickable(!settingExists);
-    }
-  })();
+  useEffect(() => {
+    const init = async () => {
+      const tab = await getCurrentTab();
+      if (tab?.url) {
+        const url = new URL(tab.url);
+        setHostname(url.hostname);
+        const existSetting = await hasSetting(url.hostname);
+        setClickable(existSetting);
+      }
+    };
+    init().then();
+  });
 
-  const addCurrentUrl = () => {
-    (() => 'b')();
+  const addCurrentUrl = async () => {
+    if (hostname) await addHost(hostname);
   };
 
   return (
