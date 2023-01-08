@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchSettings } from '../../storage';
-import ButtonComponent from '../../component/Button';
+import Button from '../../component/Button';
 import { BASE_PATH } from '../const';
 
 // type InputProp = {
@@ -27,9 +27,6 @@ function Index(): JSX.Element {
 
   return (
     <>
-      <ButtonComponent onClick={addCurrentUrlToStore}>
-        グループを追加
-      </ButtonComponent>
       <ul>
         {groupNames.map((group) => (
           <li key={group}>
@@ -37,6 +34,9 @@ function Index(): JSX.Element {
           </li>
         ))}
       </ul>
+      <Button onClick={addCurrentUrlToStore}>
+        グループを追加
+      </Button>
     </>
   );
 }

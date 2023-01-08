@@ -5,10 +5,10 @@ type ButtonProp = {
   onClick?: () => void
 };
 
-function ButtonComponent({ onClick, disable = false, children }: PropsWithChildren<ButtonProp>) {
+function Button({ onClick, disable = false, children }: PropsWithChildren<ButtonProp>) {
   return (
     <button type="submit" disabled={disable} onClick={onClick}>{children}</button>
   );
 }
 
-export default ButtonComponent;
+export default Button;

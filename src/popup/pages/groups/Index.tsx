@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import ButtonComponent from '../../../component/Button';
+import Button from '../../../component/Button';
 import {
   addHostnameToRule,
   getGroupSettingByGroupName,
@@ -12,6 +12,9 @@ function RuleIndex() {
   const [hostname, setHostname] = useState<string>();
   const [, setSetting] = useState<GroupSettingType>();
   const { group } = useParams();
+  const [limit] = useState<string>();
+  const [start] = useState<string>();
+  const [end] = useState<string>();
 
   const getCurrentTab = async (): Promise<chrome.tabs.Tab> => {
     const queryOptions = { active: true, lastFocusedWindow: true };
@@ -48,10 +51,28 @@ function RuleIndex() {
 
   return (
     <>
-      <ButtonComponent onClick={addCurrentHost}>URLを追加</ButtonComponent>
-      <ButtonComponent>
-        <Link to={`${BASE_PATH}`}>戻る</Link>
-      </ButtonComponent>
+      <div className="inputForm">
+        <label htmlFor="limit">
+          制限時間
+          <input name="limit" value={limit} />
+        </label>
+        <div className="scheduleForm">
+          <label htmlFor="start">
+            開始時間
+            <input name="start" value={start} />
+          </label>
+          <label htmlFor="name">
+            終了時間
+            <input name="end" value={end} />
+          </label>
+        </div>
+      </div>
+      <Button onClick={addCurrentHost}>URLを追加</Button>
+      <Link to={`${BASE_PATH}`}>
+        <Button>
+          戻る
+        </Button>
+      </Link>
     </>
   );
 }

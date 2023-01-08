@@ -9,7 +9,7 @@ function PopupApp(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={`${BASE_PATH}/`} element={<RootPage />} />
+        <Route path={`${BASE_PATH}`} element={<RootPage />} />
         <Route path={`${BASE_PATH}/groups/:group`} element={<GroupPage />} />
       </Routes>
     </BrowserRouter>
