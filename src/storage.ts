@@ -5,19 +5,52 @@
 //   d1.getMonth() > d2.getMonth() || d1.getDate() > d2.getDate();
 // }
 
-type SettingType = {
-  [hostname: string]: {
-    limit: number
+type GroupsType = {
+  [groupName: string]: GroupSettingType
+};
+
+export type GroupSettingType = {
+  hostnames: Array<string>;
+  rule: RuleType;
+};
+
+type RuleType = {
+  limit?: number;
+  schedule?: {
+    start: number;
+    end: number;
   }
 };
 
-const fetchSettings = async (): Promise<SettingType> => chrome.storage.sync.get();
+export const fetchSettings = async (): Promise<GroupsType> => chrome.storage.sync.get();
 
-export const hasSetting = async (hostname: string): Promise<boolean> => {
+export const getGroupSettingByHostName = async (
+  hostname: string,
+): Promise<GroupSettingType | undefined> => {
   const settings = await fetchSettings();
-  return hostname in settings;
+  return Object.values(settings).find((setting) => hostname in setting.hostnames);
 };
 
-export const addHost = async (hostname: string): Promise<void> => {
-  await chrome.storage.sync.set({ [hostname]: { limit: 5 } });
+export const getGroupSettingByGroupName = async (
+  groupName: string,
+): Promise<GroupSettingType | undefined> => {
+  const settings = await fetchSettings();
+  return settings[groupName];
+};
+
+export const addGroup = async (
+  groupName: string,
+  args?: { hostname?: string, rule?: RuleType },
+) => {
+  const groupSetting: GroupSettingType = {
+    hostnames: args?.hostname ? [args.hostname] : [],
+    rule: args?.rule ?? {},
+  };
+  await chrome.storage.sync.set({ [groupName]: groupSetting });
+};
+
+export const addHostnameToRule = async (targetGroupName: string, hostname: string) => {
+  const settings = await fetchSettings();
+  const setting = settings[targetGroupName];
+  setting.hostnames.push(hostname);
 };
