@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchSettings } from '../../storage';
-import Button from '../../component/Button';
+import Button from '../component/Button';
 import { BASE_PATH } from '../const';
-
-// type InputProp = {
-//   value: string,
-//   onChange: (value: string) => void
-// }
-//
-// const InputComponent = (props: PropsWithoutRef<InputProp>) => {
-//   return (<input onChange={event => props.onChange(event.target.value)} value={props.value}/>)
-// }
 
 function Index(): JSX.Element {
   const [groupNames, setGroupNames] = useState<Array<string>>([]);
