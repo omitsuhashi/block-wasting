@@ -54,3 +54,7 @@ export const addHostnameToRule = async (targetGroupName: string, hostname: strin
   const setting = settings[targetGroupName];
   setting.hostnames.push(hostname);
 };
+
+export const setGroupSetting = async (groupName: string, newSetting: GroupSettingType) => {
+  await chrome.storage.sync.set({ [groupName]: newSetting });
+};
